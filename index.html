@@ -370,7 +370,7 @@
             }
 
             // 建立上、下行
-            if (window.screen < 600) {
+            if (document.documentElement.clientHeight < 600) {
                 createCharsForLine(topText, lineTop);
                 createCharsForLine(middleText, lineMiddle);
                 createCharsForLine(bottomText, lineBottom);
