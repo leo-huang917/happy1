@@ -93,9 +93,10 @@
     <canvas id="canvas"></canvas>
     <button id="startBtn">Start</button>
 
-    <!-- 三行文字 -->
+    <!-- 四行文字 -->
     <div id="birthdayText">
         <div id="lineTop" class="line"></div>
+        <div id="lineMiddle" class="line"></div>
         <div id="lineBottom" class="line"></div>
         <div id="linethew" class="line"></div>
     </div>
@@ -260,7 +261,7 @@
                     Math.cos(angle) * speed,
                     Math.sin(angle) * speed,
                     color,
-                    rand(400, 600),   // 壽命延長
+                    rand(200, 400),   // 壽命延長
                     //canvas.width < 600 ? rand(250,400) : rand(400,600);
                     rand(0.05, 0.1)   // 小重力值，隨機化
                 ));
@@ -299,17 +300,20 @@
         }
 
         // ---------- 文字動畫 ----------
-        const topText = "HAPPY BIRTHDAY";
+        const topText = "HAPPY";
+        const middleText = "BIRTHDAY";
         const bottomText = "TO YOU";
         const thewText = "ヾ(≧▽≦)ゝ";
 
         const textContainer = document.getElementById("birthdayText");
         const lineTop = document.getElementById("lineTop");
+        const lineMiddle = document.getElementById("lineMiddle");
         const lineBottom = document.getElementById("lineBottom");
         const linethew = document.getElementById("linethew");
 
         function clearTextLines() {
             lineTop.innerHTML = "";
+            lineMiddle.innerHTML = "";
             lineBottom.innerHTML = "";
             linethew.innerHTML = "";
         }
@@ -366,9 +370,17 @@
             }
 
             // 建立上、下行
-            createCharsForLine(topText, lineTop);
-            createCharsForLine(bottomText, lineBottom);
-            createCharsForLine(thewText, linethew);
+            if (canvas.window <= 600) {
+                createCharsForLine(topText, lineTop);
+                createCharsForLine(middleText, lineMiddle);
+                createCharsForLine(bottomText, lineBottom);
+                createCharsForLine(thewText, linethew);
+            } else {
+                createCharsForLine(topText+" "+middleText, lineTop);
+                createCharsForLine(bottomText, lineBottom);
+                createCharsForLine(thewText, linethew);
+            }
+            
 
             // 計算所有字到位的最大時間 = max(delay + duration)
             let maxArrival = 0;
